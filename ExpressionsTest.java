@@ -4,32 +4,41 @@ import java.util.concurrent.TimeUnit;
 
 import Program12.*;
 
+/**
+ * Team : 3
+ * Members: Michael Anderson, Sophie Byron, Paul Manning, Amit Singh
+ * Date: 1/24/2024
+ * Class: APCSA
+ * Teacher: Mr. Meinzen
+ * Description: Takes an input using scanner, and uses the Expression class
+ * 	to solve a post order equation.
+ */
 public class ExpressionsTest {
+	//Field Variables
 	private static  Expression expression;
 	private static  Scanner input = new Scanner(System.in);
 	private static boolean isTerminated;
 	
-	public static void main(String a[]) throws InterruptedException {
+	/**
+	 * Main method that starts the loop.
+	 */
+	public static void main(String a[]) {
+		//Instantiate 2 field variables
 		expression = new Expression();
 		isTerminated = false;
 		
-		System.out.println("Hello User");
-		TimeUnit.SECONDS.sleep(1);
-		System.out.println("Before you are asked for any inputs, ");
-		TimeUnit.SECONDS.sleep(2);
-		System.out.println("Here are some commands: ");
-		TimeUnit.SECONDS.sleep(1);
-		System.out.println("Clear - Clear all messages in the console ");
-		System.out.println("Exit - Stop the program");
+		System.out.println("You can type Exit to stop the loop." +'\n');
 		
-		TimeUnit.SECONDS.sleep(1);
-		
+		//Start the loop
 		while(!isTerminated) {
 			push(askForInput());
 			print();
 		}
 	}
 	
+	/**
+	 * The askForInput() method uses the scanner to get a double or String.
+	 */
 	private static Object askForInput() {
 		Object inputedTerm;
 		
@@ -41,6 +50,11 @@ public class ExpressionsTest {
 		return inputedTerm;
 	}
 	
+	/**
+	 * The push() method calls the pushToFront() method to 
+	 * push the parameter value onto the stack of the Expression
+	 * class.
+	 */
 	private static void push(Object value) {
 		try {
 			if(value.equals("Exit")) isTerminated = true;
@@ -52,6 +66,9 @@ public class ExpressionsTest {
 		}
 	}
 	
+	/**
+	 * Prints out the toString() of the stack in the expression class.
+	 */
 	private static void print() {
 		System.out.println(expression.toString());
 	}
