@@ -18,7 +18,8 @@ public class ExpressionsTest {
 	private static boolean isTerminated;
 	
 	/**
-	 * Main method that starts the loop.
+	 * Main method.
+	 *  Will start a loop and test the Expression class inside,
 	 */
 	public static void main(String a[]) {
 		//Instantiate 2 field variables
