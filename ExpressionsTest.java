@@ -1,7 +1,6 @@
 package Program13;
 import java.util.Scanner;
 
-import Program12.*;
 
 /**
  * Team : 3
