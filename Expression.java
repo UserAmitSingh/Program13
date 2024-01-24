@@ -3,18 +3,19 @@ package Program13;
 import Program12.*;
 
 /**
- * Team : 1
- * Members: 
- * Date: 1/23/2024
+ * Team : 3
+ * Members: Michael Anderson, Sophie Byron, Paul Manning, Amit Singh
+ * Date: 1/24/2024
  * Class: APCSA
  * Teacher: Mr. Meinzen
- * Description: Cre
+ * Description: Creates an Expression class which gives the 
+ * 	result of a post order equation.
  */
 public class Expression {
 	//Field Variables
 	private StackList stack;
-	private String[]  operations = {"+", "-", "/", "*", "^"};
-	private int 	  numberInStack;
+	private static String[]  operations = {"+", "-", "/", "*"};
+	private int numInStack;
 	
 	/**
 	 * The Expression() constructor method instantiates the 
@@ -22,7 +23,7 @@ public class Expression {
 	 */
 	public Expression() {
 		stack = new StackList();
-		numberInStack = 0;
+		numInStack = 0;
 	}
 	
 	/**
@@ -35,10 +36,7 @@ public class Expression {
 	 * @throws Exception
 	 */
 	public void pushToFront(Object value) throws Exception {
-		//Not enough numbers to operate
-		if(numberInStack<2) throw new Exception("Please make sure you have at least "
-				+ "2 numbers in the List.");
-		else {
+		if(numInStack>=2) {
 			for(int i=0; i<operations.length; i++) {
 				if(value.equals(operations[i])) {
 					operate(i); 
@@ -48,11 +46,12 @@ public class Expression {
 		}
 		
 		//Operator did not match (lines 42-47) and the parameter value is not a double
+		//Or not enough number
 		if(!(value instanceof Double)) 
-			throw new Exception("Please make sure you are using numbers or operators");
-		
-		//Successfully add 1 to the list
-		numberInStack++;
+			throw new Exception("Please make sure you are using numbers or operators, and"
+					+ " that you have enough numbers to operate.");
+
+		numInStack++;
 		stack.push(value);
 	}
 	
@@ -61,34 +60,30 @@ public class Expression {
 	 * @param operation
 	 */
 	private void operate(int operation) {
-		//Take out 2 from the stack
 		double term1 = (double) stack.pop();
 		double term2 = (double) stack.pop();
 		
 		double term3;
-		if(operation==0) {
-			term3 = term2 + term1;
-			stack.push(term3);
-		}
-		else if(operation==1) {
-			term3 = term2 - term1;
-			stack.push(term3);
-		}
-		else if(operation==2) {
-			term3 = term2 / term1;
-			stack.push(term3);
-		}
-		else if(operation==3) {
-			term3 = term2 * term1;
-			stack.push(term3);
-		}
-		else if(operation==4) {
-			term3 = Math.pow(term2, term1);
-			stack.push(term3);
+		switch(operation) {
+		  case 0:
+			 term3 = term2 + term1;
+			 stack.push(term3);
+			 break;
+		  case 1:
+			 term3 = term2 - term1;
+			 stack.push(term3);
+			 break;
+		  case 2:
+			 term3 = term2 / term1;
+			 stack.push(term3); 
+			 break;
+		  case 3:
+			 term3 = term2 * term1;
+			 stack.push(term3);
+			 break;
 		}
 		
-		//Took out 2 and added 1
-		numberInStack--;
+		numInStack--;
 	}
 	
 	/**
